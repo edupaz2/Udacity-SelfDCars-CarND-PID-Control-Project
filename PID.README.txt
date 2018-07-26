@@ -1,0 +1,35 @@
+
+--------------------
+CTE - Cross Track Error:
+Measurement of how far away from the desired trajectory the vehicle is.
+
+--------------------
+P Proportional Control:
+Steers harder the further away we are from the desired trajectory.
+
+Kp is a scaling factor called the Proportional gain
+Ep is the CTE.
+
+Kp * CTE
+
+--------------------
+D Derivative Control:
+To reduce overshooting, we check the CTE rate, which is how fast we move in perpendicular
+direction with respect with the desired trajectory. 
+
+Kd is the Derivative gain
+Ed is the error of the Derivative Control, which is the rate of the change of CTE.
+Kd * Ed
+
+--------------------
+I Interval Control:
+To solve steady state errors, we sum all the intervals CTE to know if we spend more time
+on one side of the desired trajectory or the other.
+
+Ki is the Integral Gain.
+Ei is the error of the Integral Control, which is the sum of all the CTE intervals.
+
+// P = -this->Kp * this->p_error
+// D = - this->Kd * this->d_error
+// I = - this->Ki * this->i_error
+return -this->Kp * this->p_error - this->Kd * this->d_error - this->Ki * this->i_error;
