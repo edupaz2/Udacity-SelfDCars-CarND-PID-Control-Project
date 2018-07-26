@@ -30,7 +30,12 @@ public:
   /*
   * Initialize PID.
   */
-  void Init(double Kp, double Kd, double Ki);
+  void init(double Kp, double Kd, double Ki);
+
+  /*
+  *
+  */
+  double getSteerValue(double cte);
 };
 
 #endif /* PID_H */
